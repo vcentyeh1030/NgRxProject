@@ -1,0 +1,13 @@
+<mat-toolbar [style.background]="(login$ | async) ? 'darkviolet' : 'seagreen'" class="navbar">
+  <a mat-button routerLink="/">HEADER</a>
+  <span class="to-right"></span>
+  <a mat-button *ngIf="!(login$ | async)" routerLink="/user/login">LOGIN</a>
+  <a mat-button *ngIf="login$ | async" routerLink="/member">CENTER</a>
+  <button *ngIf="user$ | async" mat-button [matMenuTriggerFor]="userMenu">
+    <span>{{user$ | async}}</span> <mat-icon>arrow_drop_down</mat-icon>
+  </button>
+</mat-toolbar>
+<mat-menu x-position="before" #userMenu="matMenu">
+  <button mat-menu-item>Account</button>
+  <button mat-menu-item (click)="logout()">LOGOUT</button>
+</mat-menu>
